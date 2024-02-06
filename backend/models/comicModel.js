@@ -19,3 +19,5 @@ const comicSchema = mongoose.Schema(
     timestamp: true,
   }
 );
+
+export const Comic = mongoose.model("Comic", comicSchema);
