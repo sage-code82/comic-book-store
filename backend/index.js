@@ -29,7 +29,7 @@ app.post("/comics", async (request, response) => {
       publishYear: request.body.publishYear,
     };
     const comic = await Comic.create(newComic);
-    return response.status(201).send(book);
+    return response.status(201).send(comic);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -60,7 +60,42 @@ app.get("/comics/:id", async (request, response) => {
   }
 });
 
-app.put();
+app.put("/comics/:id", async (request, response) => {
+  try {
+    if (
+      !request.body.title ||
+      !request.body.publisher ||
+      !request.body.publishYear
+    ) {
+      return response.status(400).send({
+        message: "Send all required fields: title, publisher, publishYear",
+      });
+    }
+    const { id } = request.params;
+    const result = await Comic.findByIdAndUpdate(id, request.body);
+    if (!result) {
+      return response.status(404).json({ message: "Comic not found" });
+    }
+    return response.status(200).send({ message: "Comic updated" });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+app.delete("/comics/:id", async (request, response) => {
+  try {
+    const { id } = request.params;
+    const result = await Book.findByIdAndDelete(id);
+    if (!result) {
+      return response.status(404).json({ message: "Comic not found" });
+    }
+    return response.status(200).send({ message: "Comic deleted" });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
 
 mongoose
   .connect(mongoDBURL)
