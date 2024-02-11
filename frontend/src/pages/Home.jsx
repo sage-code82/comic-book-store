@@ -49,7 +49,7 @@ const Home = () => {
           </thead>
           <tbody>
             {comics.map((comic, index) => (
-              <tr key={comic_id} className="h-8">
+              <tr key={comic._id} className="h-8">
                 <td className="border border-slate-800 rounded-md text-center">
                   {index + 1}
                 </td>
