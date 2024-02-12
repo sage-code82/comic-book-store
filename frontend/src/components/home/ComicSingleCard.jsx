@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { PiBookOpenTextLight } from "react-icons/pi";
-import { BiUserCircle } from "react-icons/bi";
+import { BiShow, BiUserCircle } from "react-icons/bi";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
+import ComicModal from "./ComicModal";
 
 const ComicSingleCard = ({ comic }) => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <div>
       <div
@@ -26,6 +28,10 @@ const ComicSingleCard = ({ comic }) => {
           <h2 className="my-1">{comic.publisher}</h2>
         </div>
         <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
+          <BiShow
+            className="text-3xl text-purple-700 hover:text-black cursor-pointer"
+            onClick={() => setShowModal(true)}
+          />
           <Link to={`/comics/details/${comic._id}`}>
             <BsInfoCircle className="text-2xl text-green-800 hover:text-black" />
           </Link>
@@ -36,6 +42,9 @@ const ComicSingleCard = ({ comic }) => {
             <MdOutlineDelete className="text-2xl text-red-600 hover:text-black" />
           </Link>
         </div>
+        {showModal && (
+          <ComicModal comic={comic} onClose={() => setShowModal(false)} />
+        )}
       </div>
     </div>
   );
