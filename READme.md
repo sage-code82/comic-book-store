@@ -22,4 +22,6 @@ On the info card the date stamp is showing as Invalid.
 - On the modal have a thumbs up or thumbs down to show if I like it
 - Change the font to match the style of a comic library.
 
+* use toast to add some notifications
+
 I'm really happy with how the basic structure of this database has worked and I will be using this code as the basis of every MERN project I put together in the future.
