@@ -24,7 +24,7 @@ const CreateComics = () => {
         navigate("/");
       })
       .catch((error) => {
-        setLoading(fales);
+        setLoading(false);
         alert("Whoops somethings up!");
         console.log(error);
       });
